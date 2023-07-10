@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "292978153429",
+    "project_id": "firebase-fm",
+    "storage_bucket": "firebase-fm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292978153429:android:ec9882985139fa94ab0f5c",
+        "android_client_info": {
+          "package_name": "com.example.flutterfm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292978153429-k7s8ok4usimrnbfmre1o67fcf1heq4cg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKe6EjSiouADhA6G2ZWWke83YPE1ahLi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292978153429-k7s8ok4usimrnbfmre1o67fcf1heq4cg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292978153429-7dhtadlejli10g6jt1msisu5ve9f3ov1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterfm"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
