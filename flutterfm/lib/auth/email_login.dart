@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../controllers/auth_controller.dart';
+
 class EmailLogin extends StatefulWidget {
   const EmailLogin({super.key});
 
@@ -9,6 +11,8 @@ class EmailLogin extends StatefulWidget {
 }
 
 class _EmailLoginState extends State<EmailLogin> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -17,6 +21,12 @@ class _EmailLoginState extends State<EmailLogin> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> login() async {
+    if (_formKey.currentState!.validate()) {
+      await AuthController.instance.signIn(context, _emailController.text, _passwordController.text);
+    }
   }
 
   @override
@@ -61,17 +71,7 @@ class _EmailLoginState extends State<EmailLogin> {
                     (states) => const EdgeInsets.all(20.0),
                   ),
                 ),
-                onPressed: () async {
-                  try {
-                    FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: _emailController.text.trim(),
-                      password: _passwordController.text.trim(),
-                    );
-                    Navigator.pushNamed(context, '/homescreen');
-                  } catch (error) {
-                    error.toString();
-                  }
-                },
+                onPressed: login,
                 child: const Text(
                   'Login account',
                   style: TextStyle(color: Colors.white),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../controllers/auth_controller.dart';
+
 class EmailRegister extends StatefulWidget {
   const EmailRegister({super.key});
 
@@ -9,6 +11,8 @@ class EmailRegister extends StatefulWidget {
 }
 
 class _EmailRegisterState extends State<EmailRegister> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -18,6 +22,12 @@ class _EmailRegisterState extends State<EmailRegister> {
     _passwordController.dispose();
 
     super.dispose();
+  }
+
+  Future<void> login() async {
+    if (_formKey.currentState!.validate()) {
+      await AuthController.instance.createUser(context, _emailController.text, _passwordController.text);
+    }
   }
 
   @override
@@ -62,17 +72,7 @@ class _EmailRegisterState extends State<EmailRegister> {
                     (states) => const EdgeInsets.all(20.0),
                   ),
                 ),
-                onPressed: () async {
-                  try {
-                    FirebaseAuth.instance.createUserWithEmailAndPassword(
-                      email: _emailController.text.trim(),
-                      password: _passwordController.text.trim(),
-                    );
-                    Navigator.pushNamed(context, '/homescreen');
-                  } catch (error) {
-                    error.toString();
-                  }
-                },
+                onPressed: login,
                 child: const Text(
                   'Register account',
                   style: TextStyle(color: Colors.white),
